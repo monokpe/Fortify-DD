@@ -1,0 +1,13 @@
+.env
+.venv/
+.pytest_cache/
+.ruff_cache/
+__pycache__/
+*.pyc
+.coverage
+coverage.json
+.fortify_uvicorn.pid
+Fortify_DD_PRD*.docx
+demo_app.py
+scratch/
+tests/

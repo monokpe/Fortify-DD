@@ -13,6 +13,9 @@ dependencies = [
   "pydantic-settings>=2.4.0"
 ]
 
+[project.scripts]
+app = "app.main:app"
+
 [project.optional-dependencies]
 demo = [
   "streamlit>=1.41.0",

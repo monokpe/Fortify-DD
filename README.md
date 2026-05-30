@@ -86,6 +86,38 @@ Key settings:
 - `TRIGGERWARE_WEBHOOK_URL`: optional downstream TriggerWare webhook destination.
 - `SPEECHMATICS_API_KEY`: enables live Speechmatics voice generation when wired.
 
+## Deploying to Vercel
+
+This repository is configured for Vercel's Python runtime. Vercel should detect the
+FastAPI app from `pyproject.toml` and serve `app.main:app`.
+
+Recommended first deployment:
+
+1. Import the GitHub repository in Vercel.
+2. Keep the project root as the repository root.
+3. Leave build and output settings empty so Vercel uses the Python preset.
+4. Add environment variables:
+
+```text
+APP_ENV=production
+MOCK_MODE=true
+```
+
+For a live-data deployment, set `MOCK_MODE=false` and add the API keys from
+`.env.example`.
+
+Useful smoke tests after deployment:
+
+```powershell
+Invoke-RestMethod https://your-project.vercel.app/health
+Invoke-RestMethod -Method Post -Uri https://your-project.vercel.app/webhook/trigger -ContentType "application/json" -Body '{"company":"Acme Corp","domain":"acme.com"}'
+```
+
+The inline trigger endpoints are the safest Vercel demo path because they complete
+inside a single request. The `/assess` polling flow currently uses in-memory
+background task state, which is suitable for local demos but should move to durable
+storage before relying on it in serverless production.
+
 ## Bright Data Integration
 
 Both SERP API and Web Unlocker use Bright Data's shared request endpoint:
