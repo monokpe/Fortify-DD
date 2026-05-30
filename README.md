@@ -88,8 +88,9 @@ Key settings:
 
 ## Deploying to Vercel
 
-This repository is configured for Vercel's Python runtime. Vercel should detect the
-FastAPI app from `pyproject.toml` and serve `app.main:app`.
+This repository is configured for Vercel's Python runtime. Vercel should detect
+the root `index.py` entrypoint, which re-exports the FastAPI app from
+`app.main:app`.
 
 Recommended first deployment:
 
